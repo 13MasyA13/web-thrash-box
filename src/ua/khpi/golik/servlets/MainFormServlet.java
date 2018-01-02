@@ -23,7 +23,18 @@ public class MainFormServlet extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		String userName = request.getParameter("userName");
-		out.println("Hello From POST method " + userName);
+		String fullName = request.getParameter("fullName");
+		out.println("Hello From POST method " + userName + 
+		"We know your full name is " + fullName);
+		out.println();
+		String prof = request.getParameter("prof");
+		out.println("You are a " + prof);
+		out.println();
+		String[] location = request.getParameterValues("location");
+		out.println("You are from " + location.length + " places : ");
+		for(int i = 0; i < location.length; i++) {
+			out.println(location[i]);
+		}
 	}
 
 }
