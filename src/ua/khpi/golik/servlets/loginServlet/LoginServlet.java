@@ -1,6 +1,8 @@
 package ua.khpi.golik.servlets.loginServlet;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ua.khpi.golik.service.LoginService;
+import ua.khpi.golik.service.User;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -21,7 +24,10 @@ public class LoginServlet extends HttpServlet {
 		LoginService logServ = new LoginService();
 		boolean result = logServ.authenticate(userId, userPassword);
 		if(result) {
-			response.sendRedirect("success.jsp");
+			User user = logServ.getUserDetails(userId);
+			request.setAttribute("user", user);
+			RequestDispatcher dispatch = request.getRequestDispatcher("success.jsp");
+			dispatch.forward(request, response);
 			return;
 		}
 		else {
