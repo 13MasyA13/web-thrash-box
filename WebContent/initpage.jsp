@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%!
+public void jspInit(){
+	String defaultUser = getServletConfig().getInitParameter("defaultUser");
+}
+%>
 The default user from the servlet config is : 
 <%=
 getServletConfig().getInitParameter("defaultUser")
