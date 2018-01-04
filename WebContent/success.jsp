@@ -8,9 +8,9 @@
 </head>
 <body>
 	<h3>Login successful!</h3>
-	<%
-	User user = (User) request.getAttribute("user");
-	%>
-	<br><h3>Hello <%= user.getUserName() %>!</h3>
+	<jsp:useBean id="user" class="ua.khpi.golik.service.User" scope="request">
+		<jsp:setProperty name="user" property="userName" value="NewUser"/>
+	</jsp:useBean>
+	<h3>Hello <jsp:getProperty property="userName" name="user"/></h3>
 </body>
 </html>
